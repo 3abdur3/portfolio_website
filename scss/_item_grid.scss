@@ -1,0 +1,91 @@
+// WORK-GALLERY-PAGE
+.items{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  box-shadow: 0 5px 10px 0 rgba(0,0,0,0.3)
+}
+
+.item{
+  position: relative;
+  background: $main-color;
+  overflow: hidden;
+
+  // we gonna use 'overlay' property
+  &::after{
+    content: '';
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: inherit;
+    width: 100%;
+    height: 100%;
+    opacity: 0.9;
+    transform: scale(2) translateX(-75%) translateY(-75%) rotate(-28deg);
+    transition: transform 3s cubic-bezier(0.2, 1, 0.3, 1);
+  }
+  // Main 'overlay' effect here
+  &:hover::after{
+    transform: scale(2) translateX(0) translateY(0) rotate(-28deg);
+  }
+
+  // SCALE image with hover
+  &:hover &-image{
+    transform: scale(1.2);
+  }
+
+  // Bring in Text on hover
+  &:hover &-text{
+    opacity: 1;
+    // because we gonna set opacity to '0' by default
+    transform: translateY(0);
+  }
+
+  &-image{
+    display: block;
+    transition: all 750ms cubic-bezier(0.2, 1, 0.3, 1);
+  }
+
+  &-image img{
+  display: block;
+  // images are inline elements, so they are considered as "text". So if you set: font-size: 0 and line-height: 0 you will achieve the same result, without changing display to block.
+  }
+
+  &-text{
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    text-align: center;
+    color: #fff;
+    opacity: 0;
+    z-index: 1;
+    transform: translateY(-20%);
+    // This will be default value for 'transform'
+    transition: opacity 500ms cubic-bezier(0.2, 1, 0.3, 1), transform 500ms cubic-bezier(0.2, 1, 0.3, 1);
+    transition-delay: 500ms;
+  }
+
+  &-text-wrap{
+    position: absolute;
+    width: 100%;
+    top: 50%;
+    // It moves the content down 50%
+    transform: translateY(-50%);
+  }
+
+  &-text-category{
+    text-transform: uppercase;
+    font-size: 1rem;
+    opacity: 0.7;
+    margin: 0;
+  }
+
+  &-text-title{
+    font-size: 1.6rem;
+    padding: 0 1rem;
+    margin-top: 5px;
+  }
+
+}

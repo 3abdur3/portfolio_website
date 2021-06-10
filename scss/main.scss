@@ -1,0 +1,377 @@
+@import "config";
+@import "utilities";
+@import "item_grid";
+// *****RESET****
+*{
+  margin: 0;
+  padding: 0;
+  // box-sizing: border-box;
+  // If we use here box-sizing, then on SECTION-C boxes get messed (may be becaue it is in grid)
+}
+body{
+  font-family: 'Dosis', sans-serif;
+  line-height: 1.6;
+  background: #fff;
+}
+a{
+  text-decoration: none;
+  color: $dark-color;
+}
+ul{
+  list-style: none;
+}
+h2,h3,h4{
+  text-transform: uppercase;
+}
+img{
+  width: 100%
+  // Because we keep the image inside the container(not-outside)
+}
+
+// ****MAIN-NAV/MENU****
+#main-nav{
+  // For menu, with "flex" is always best/easy to style
+  display: flex;
+  justify-content: space-between;
+  padding-top: 1rem;
+  ul{
+    display: flex;
+  }
+  li{
+    padding: 1rem 1.5rem;
+  }
+  a{
+    text-decoration: none;
+    text-transform: uppercase;
+    padding: 0.5rem;
+    color: #fff;
+    border-bottom: 3px solid transparent;
+    // Transparent-color, becasue I want the border will be shown when I "hover" over it, otherwise it will push text to upwards to show border-color during 'hover'
+    transition: border-color 0.5s;
+
+    &:hover{
+      border-color: $medium-color;
+    }
+    &.current{
+      border-color: $main-color;
+    }
+  }
+}
+
+// ****LOGO****
+#logo{
+  width: 70px;
+  height: 70px;
+  // If we used some 'text'(with h1..) as logo, then better to use color and text-transform property to style it
+  color: #fff;
+  text-transform: uppercase;
+}
+
+// ******Header****
+#header{
+  // Header-home
+  &-home{
+    background: $bg-image no-repeat center right / cover;
+    height: 100vh;
+    // header-content
+    .header-content{
+      text-align: center;
+      color: #fff;
+      padding-top: 20%;
+      // will add padding-top relative to the height of the parent container which is "100vh"
+
+      h1{
+        font-size: 4rem;
+        line-height: 1.2;
+      }
+    }
+  }
+  // Header-inner
+  &-inner{
+    background: $bg-image no-repeat 20% 30% / cover;
+    height: 5.5rem;
+    border-bottom: 3px solid $main-color;
+  }
+}
+
+    // *****SECTION-HOME*****
+  #home{
+    // Section-home-a
+    &-a{
+      .specials{
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        grid-gap: 1rem;
+        margin-top: 3rem;
+
+        .fas{
+          color: $main-color;
+          padding-bottom: 0.5rem;
+        }
+      }
+    }
+
+    // Section-home-b
+    &-b{
+      .stats{
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+
+        li{
+          line-height: 2;
+
+          &.stats-title{
+            font-size: 1.5rem;
+          }
+          &.stats-number{
+            font-size: 2rem;
+            font-weight: bold;
+          }
+        }
+
+        div{
+          padding: 3rem 0;
+
+          &:nth-child(odd){
+            background: $light-color;
+          }
+
+          &:nth-child(even){
+            background: $medium-color;
+          }
+        }
+      }
+    }
+
+    // Section-home-c
+    &-c{
+      .process{
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        grid-gap: 1.5rem;
+        text-align: center;
+
+        &-icon{
+          position: relative;
+          // It is a parent of 'process-step'
+          width: 70px;
+          height: 70px;
+          padding: 2rem;
+          line-height: 70px;
+          background: $dark-color;
+          color: set-text-color($dark-color);
+          border-radius: 50%;
+          text-align: center;
+          transition: all 1s;
+
+          &:hover{
+            background: $main-color;
+            // width: 90px;
+            // height: 90px;
+            // line-height: 90px;
+
+            // above three line can be done in one line here and it is even more effective
+            transform: scale(1.2);
+            // The scale() method increases or decreases the width and height of an element.
+
+            .process-step{
+              // This is already styiled beneth
+              background: $dark-color;
+              color: set-text-color($dark-color);
+            }
+
+          }
+        }
+
+        &-step{
+          position: absolute;
+          top: 0;
+          right: 0;
+          font-size: 28px;
+          background: $main-color;
+          color: set-text-color($main-color);
+          height: 15px;
+          width: 15px;
+          line-height: 15px;
+          border-radius: 50%;
+          padding: 1rem;
+          transition: all 1s;
+          // 'hover' styled above
+        }
+
+      }
+    }
+  }
+
+// *****ABOUT-PAGE*****
+#about{
+  &-a{
+    .about-info{
+      display: grid;
+      grid-template-areas:
+        'bioimage bio bio'
+        'aw1 aw2 aw3';
+      grid-gap: 1.2rem;
+    }
+
+    // We have to assign those 'grid-areas' as we used it on the top
+    .bio-image{grid-area: bioimage;}
+    .bio{
+      grid-area: bio;
+      border-left: 3px solid $main-color;
+      padding: 0.8rem;
+    }
+    .award-1{ grid-area: aw1;}
+    .award-2{ grid-area: aw2;}
+    .award-3{ grid-area: aw3;}
+
+    .award-1 .fas, .award-2 .fas, .award-3 .fas {
+      color: $main-color;
+      margin: 1rem;
+    }
+  }
+
+    // PROGRESS-BAR
+  &-b{
+    .progress{
+      height: 20px;
+      background: $medium-color;
+      border-radius: 5px;
+      margin-bottom: 0.5rem;
+      overflow: hidden;
+
+      div{
+        height: 100%;
+        color: #fff;
+        text-align: center;
+        background: $main-color;
+      }
+    }
+  }
+
+  // LOGOS
+  &-c{
+    .about-logos{
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-gap: 2rem;
+      img{ width: 70%;}
+    }
+  }
+
+  // TESTIMONIALS
+  &-d{
+    .testimonials{
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-gap: 0.5rem;
+
+      p{
+        border: 1px solid $medium-color;
+        border-radius: 5px;
+        padding: 0.5rem;
+      }
+
+      ul{
+        display: flex;
+        align-items: center;
+        list-style: none;
+        margin-top: 1rem;
+      }
+
+      img{
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        margin-right: 0.5rem;
+      }
+    }
+  }
+
+}
+
+// *****CONTACT-PAGE*****
+#contact{
+  &-a{
+    .text-field{
+      display: grid;
+      // To visually style, need to use 'grid-template-AREAS'
+      grid-template-areas:
+        'name email'
+        'subject phone'
+        'message message';
+      grid-gap: 1.2rem;
+      margin-bottom: 1.2rem;
+
+      // We must add here those above 'GRID-AREAS'
+      .name-input{grid-area: name;}
+      .email-input{grid-area: email;}
+      .subject-input{grid-area: subject;}
+      .phone-input{grid-area: phone;}
+      .message-input{
+        grid-area: message;
+        height: 100px;
+      }
+    }
+
+    .text-input{
+      padding: 0.5rem 1rem;
+    }
+
+    button[type='submit']{
+      width: 50%;
+    }
+  }
+
+  &-b{
+    .contact-info{
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-gap: 0.5rem;
+      text-align: center;
+    }
+  }
+
+  &-c{
+    h1{
+      text-align: center;
+      font-size: 3rem;
+    }
+  }
+
+}
+
+
+
+// ******FOOTER*****
+#main-footer{
+  background: $dark-color;
+  color: #fff;
+  height: 5rem;
+
+  .footer-content{
+    display: flex;
+    justify-content: space-between;
+    height: 5rem;
+    align-items: center;
+
+    .social .fab{
+      margin-right: 1rem;
+      border: 2px solid #fff;
+      border-radius: 50%;
+      width: 20px;
+      height: 20px;
+      line-height: 20px;
+      text-align: center;
+      padding: 0.5rem;
+
+      &:hover{
+        background: $main-color;
+      }
+
+    }
+  }
+}
+
+// *****IMPORT MEDIA-QUERIES****
+@import "media"
